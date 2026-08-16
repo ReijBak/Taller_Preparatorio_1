@@ -2,6 +2,7 @@ import Methods.*;
 import Classes.Exercise1.*;
 import Classes.Exercise2.*;
 import Classes.Exercise3.*;
+import Classes.Exercise4.*;
 import java.util.Scanner;
 public class Exercises {
     Scanner sc = new Scanner(System.in);
@@ -155,7 +156,59 @@ public class Exercises {
     }
 
     public void Exercise_4() {
-        System.out.println("Hello, desde ejercicio 4!");
+        Exercise4 e = new Exercise4();
+        Seats[][] s = new Seats[3][10];
+        s = e.FillSeatsMatrix(s);
+        boolean goOn = true;
+        while (goOn) {
+            try {
+                System.out.println("\n=============================//=============================\n");
+                System.out.println("Bienvenido al ejercicio 4, por favor seleccione una opción:\n" +
+                        "1. Mostrar todos los asientos\n" +
+                        "2. Ordenar asientos por precio\n" +
+                        "3. Volver al menú principal");
+                int opt = sc.nextInt();
+                sc.nextLine(); // Clear the buffer
+                switch (opt) {
+                    case 1:
+                        System.out.println("Listado de asientos:");
+                        for (int i = 0; i < s.length; i++) {
+                            for (int j = 0; j < s[i].length; j++) {
+                                if (s[i][j] != null) {
+                                    System.out.println("-------------------------------");
+                                    System.out.println("Número: " + s[i][j].getNumber());
+                                    System.out.println("Fila: " + s[i][j].getRow());
+                                    System.out.printf("Precio: %.2f\n", s[i][j].getPrice());
+                                }
+                            }
+                        }
+                        break;
+                    case 2:
+                        s = e.OrderSeatsRowsByPrice(s);
+                        System.out.println("Asientos ordenados por precio:");
+                        for (int i = 0; i < s.length; i++) {
+                            for (int j = 0; j < s[i].length; j++) {
+                                if (s[i][j] != null) {
+                                    System.out.println("-------------------------------");
+                                    System.out.println("Número: " + s[i][j].getNumber());
+                                    System.out.println("Fila: " + s[i][j].getRow());
+                                    System.out.printf("Precio: %.2f\n", s[i][j].getPrice());
+                                }
+                            }
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Saliendo del ejercicio 4...");
+                        goOn = false;
+                        break;
+                    default:
+                        System.out.println("Opción no válida");
+                }
+            } catch (Exception ex) {
+                System.out.println("Error: " + ex.getMessage());
+                sc.nextLine(); // Clear the buffer
+            }
+        }
     }
 
     public void Exercise_5() {
