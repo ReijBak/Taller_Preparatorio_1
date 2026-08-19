@@ -3,6 +3,7 @@ import Classes.Exercise1.*;
 import Classes.Exercise2.*;
 import Classes.Exercise3.*;
 import Classes.Exercise4.*;
+import Classes.Exercise5.*;
 import java.util.Scanner;
 public class Exercises {
     Scanner sc = new Scanner(System.in);
@@ -212,7 +213,74 @@ public class Exercises {
     }
 
     public void Exercise_5() {
-        System.out.println("Hello, desde ejercicio 5!");
+        Exercise5 e = new Exercise5();
+        Products5[][] p1 = new Products5[3][10];
+        Products5[][] p2 = new Products5[3][10];
+        p1 = e.FillProductsMatrix(p1);
+        p2 = e.FillProductsMatrix(p2);
+        boolean goOn = true;
+        while (goOn) {
+            try {
+                System.out.println("\n=============================//=============================\n");
+                System.out.println("Bienvenido al ejercicio 5, por favor seleccione una opción:\n" +
+                        "1. Mostrar todos los productos del primer inventario\n" +
+                        "2. Mostrar todos los productos del segundo inventario\n" +
+                        "3. Combinar inventarios\n" +
+                        "4. Volver al menú principal");
+                int opt = sc.nextInt();
+                sc.nextLine(); // Clear the buffer
+                switch (opt) {
+                    case 1:
+                        System.out.println("Listado de productos del primer inventario:");
+                        for (int i = 0; i < p1.length; i++) {
+                            for (int j = 0; j < p1[i].length; j++) {
+                                if (p1[i][j] != null) {
+                                    System.out.println("-------------------------------");
+                                    System.out.println("Nombre: " + p1[i][j].getName());
+                                    System.out.printf("Precio: %.2f\n", p1[i][j].getPrice());
+                                    System.out.println("Cantidad: " + p1[i][j].getStock());
+                                }
+                            }
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Listado de productos del segundo inventario:");
+                        for (int i = 0; i < p2.length; i++) {
+                            for (int j = 0; j < p2[i].length; j++) {
+                                if (p2[i][j] != null) {
+                                    System.out.println("-------------------------------");
+                                    System.out.println("Nombre: " + p2[i][j].getName());
+                                    System.out.printf("Precio: %.2f\n", p2[i][j].getPrice());
+                                    System.out.println("Cantidad: " + p2[i][j].getStock());
+                                }
+                            }
+                        }
+                        break;
+                    case 3:
+                        Products5[][] combined = e.CombineProducts(p1, p2);
+                        System.out.println("Inventarios combinados:");
+                        for (int i = 0; i < combined.length; i++) {
+                            for (int j = 0; j < combined[i].length; j++) {
+                                if (combined[i][j] != null) {
+                                    System.out.println("-------------------------------");
+                                    System.out.println("Nombre: " + combined[i][j].getName());
+                                    System.out.printf("Precio: %.2f\n", combined[i][j].getPrice());
+                                    System.out.println("Cantidad: " + combined[i][j].getStock());
+                                }
+                            }
+                        }
+                        break;
+                    case 4:
+                        goOn = false;
+                        break;
+                    default:
+                        System.out.println("Opción no válida");
+                }
+            } catch (Exception ex) {
+                System.out.println("Error: " + ex.getMessage());
+                sc.nextLine(); // Clear the buffer
+            }
+        }
     }
 
     public void Exercise_6() {
